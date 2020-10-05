@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Discord;
 using Discord.WebSocket;
+using DiscordBot.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
@@ -10,6 +11,7 @@ namespace DiscordBot
     class Program
     {
         private DiscordSocketClient _client;
+        private CommandHandlingService _commands;
 
         static void Main(string[] args)
         {
@@ -22,6 +24,9 @@ namespace DiscordBot
             
             _client = services.GetService<DiscordSocketClient>();
             _client.Log += Log;
+
+            _commands = services.GetService<CommandHandlingService>();
+            await _commands.InstallCommandsAsync();
 
             await _client.LoginAsync(TokenType.Bot, services.GetService<BotConfig>().Token);
             await _client.StartAsync();
