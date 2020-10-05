@@ -1,8 +1,8 @@
 version: '3.4'
 
 services:
-  discordbot:
-    image: ${DOCKER_REGISTRY-}discordbot
+  bot:
+    image: bot
     build:
       context: .
       dockerfile: DiscordBot/Dockerfile
