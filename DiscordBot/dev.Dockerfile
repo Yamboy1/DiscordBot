@@ -9,12 +9,4 @@ COPY ["DiscordBot/DiscordBot.csproj", "DiscordBot/"]
 RUN dotnet restore "DiscordBot/DiscordBot.csproj"
 COPY . .
 WORKDIR "/src/DiscordBot"
-RUN dotnet build "DiscordBot.csproj" -c Release -o /app/build
-
-FROM build AS publish
-RUN dotnet publish "DiscordBot.csproj" -c Release -o /app/publish
-
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "watch", "run" "DiscordBot.dll"]
+ENTRYPOINT ["dotnet", "watch", "run", "-p", "DiscordBot.csproj"]

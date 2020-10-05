@@ -6,3 +6,12 @@ services:
     build:
       context: .
       dockerfile: DiscordBot/Dockerfile
+    secrets:
+      - Token
+      - Prefix
+
+secrets:
+  Token:
+    external: true
+  Prefix:
+    external: true

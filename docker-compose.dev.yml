@@ -1,8 +1,9 @@
 version: '3.4'
 services:
-  discordbot:
+  discordbot_dev:
     build:
-      dockerfile: DiscordBot/Dockerfile.dev
+      context: .
+      dockerfile: DiscordBot/dev.Dockerfile
     env_file: .env
     volumes:
       - .:/src

@@ -6,6 +6,7 @@ using Discord.Commands;
 using Discord.WebSocket;
 
 using DiscordBot.Services;
+using Mcrio.Configuration.Provider.Docker.Secrets;
 using Microsoft.Extensions.Options;
 
 namespace DiscordBot
@@ -23,6 +24,7 @@ namespace DiscordBot
 
         public static IConfiguration BuildConfiguration() => new ConfigurationBuilder()
             .AddEnvironmentVariables("DiscordBot_")
+            .AddDockerSecrets()
             .Build();
 
         public static ServiceProvider BuildServiceProvider()
